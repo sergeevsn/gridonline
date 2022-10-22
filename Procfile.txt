@@ -1,0 +1,1 @@
+web: gunicorn gridonline.wsgi --log-file
