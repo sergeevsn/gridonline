@@ -1,0 +1,27 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class = "columns">
+    <div class = "column is-full">
+      <div class="section">       
+        <div class = "box">
+            <p>This web service extracts 3D cdp grid parameters from the text-file table or SEG-Y file.
+            The table must contain columns: inline, crossline, X, Y. Columns must be space separated.
+            SEG-Y trace headers must contain inlines, crosslines, X and Y in traditional byte positions 
+            (181 for X, 185 for Y, 189 for inline, 193 for crossline).</p>
+        </div>
+        <div class = "box">
+            <p>Grid parameters you get as a result:</p>
+            <ul>
+            <li> - Min and max of inlines, crosslines, X and Y</li>
+            <li> - Formulas to get inlines and crosslines from X and Y and vice versa</li>
+            <li> - Coordinates of grid origin (inline 1, crossline 1)</li>
+            <li> - Grid azimuth in degrees</li>
+            <li> - Bin size (in consideration of square bin)</li>
+            <li> - Are inlines increase along Y axe or not (True or False)</li>
+            </ul>
+        </div>
+    </div>
+</div>    
+
+{% endblock %}

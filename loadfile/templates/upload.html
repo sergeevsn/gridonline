@@ -1,0 +1,95 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class = "columns">
+  <div class = "column is-one-third">
+    <div class="section">       
+           <div class = "box">
+               <form action = "/" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                        {% for field in form %}
+                            <div class="field">
+                                <label class="label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                                <div class ="control">
+                                {{ field }}
+                                </div>
+                            </div>
+                         {% endfor %}
+                        <div class="field">
+                            <button class="button is-link">
+                               Upload
+                            </button>
+                        </div>
+               </form>
+            </div>
+         
+    </div>
+  </div>  
+
+  <div class = "column is-half">
+    {% if inline_min_max and xline_min_max and x_min_max and y_min_max %}
+    <div class = "section">
+    <div class="box">
+      <h1 class = "title">{{ request.session.input_file_name }}</h1>
+      <table class="table">
+       
+        <tbody>
+            <tr>
+                <th>INLINES
+                <td>{{ inline_min_max }}</td>
+            </tr>    
+            <tr>
+                <th>XLINES
+                <td>{{ xline_min_max }}</td>
+            </tr>    
+            <tr>
+                <th>X
+                <td>{{ x_min_max }}</td>
+            </tr>    
+            <tr>
+                <th>Y
+                <td>{{ y_min_max }}</td>
+            </tr>    
+            <tr>
+                <th>INLINE Formula
+                <td>{{ inline_formula }}</td>
+            </tr>  
+            <tr>
+                <th>XLINE Formula
+                <td>{{ xline_formula }}
+                    
+                </td>
+            </tr>    
+            <tr>
+                <th>X Formula
+                <td>{{ x_formula }}</td>
+            </tr>  
+            <tr>
+                <th>Y Formula
+                <td>{{ y_formula }}</td>
+            </tr>  
+            <tr>
+                <th>Bin Size</th>
+                <td>{{ step }} </td>
+            </tr>
+            <tr>
+                <th>Azimuth</th>
+                <td>{{ alpha }} </td>
+            </tr>
+            <tr>
+                <th>Inlines along Y</th>
+                <td>{{ inline_along_y }} </td>
+            </tr>
+            <tr>
+                <th>Grid start coordinates</th>
+                <td>{{ X0 }}, {{ Y0 }} </td>
+            </tr>
+        </tbody>
+    </table>
+  </div> 
+</div>
+{% endif %}
+  </div>
+</div>
+   
+{% endblock %}
