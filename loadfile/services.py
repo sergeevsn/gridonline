@@ -124,5 +124,5 @@ def get_regression(inlines, xlines, x, y):
             'Y0': linregY[0] + linregY[1] + linregY[2],
             'step': step,
             'inline_along_y': inline_along_y,
-            'alpha': alpha,
+            'alpha': alpha,        
            }
