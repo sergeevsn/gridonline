@@ -44,10 +44,11 @@ def show_uploads_page(request):
                         return render(request, 'upload.html', {'form': f})
 
                 regr_params = get_regression(inlines, xlines, x, y)
-                x_formula = f"INLINE*{(regr_params.get('x_coefs')[0]):.2f} {plus(regr_params.get('x_coefs')[1])} XLINE*{abs(regr_params.get('x_coefs')[1]):.2f} {plus(regr_params.get('x_coefs')[2][0])} {abs(regr_params.get('x_coefs')[2][0]):.2f}"
-                y_formula = f"INLINE*{(regr_params.get('y_coefs')[0]):.2f} {plus(regr_params.get('y_coefs')[1])} XLINE*{abs(regr_params.get('y_coefs')[1]):.2f} {plus(regr_params.get('x_coefs')[2][0])} {abs(regr_params.get('y_coefs')[2][0]):.2f}"
-                inline_formula = f"X*{(regr_params.get('inline_coefs')[0]):.2f} {plus(regr_params.get('inline_coefs')[1])}Y*{abs(regr_params.get('inline_coefs')[1]):.2f} {plus(regr_params.get('inline_coefs')[2][0])} {abs(regr_params.get('inline_coefs')[2][0]):.2f}"
-                xline_formula = f"X*{(regr_params.get('xline_coefs')[0]):.2f} {plus(regr_params.get('xline_coefs')[1])} Y*{abs(regr_params.get('xline_coefs')[1]):.2f}  {plus(regr_params.get('xline_coefs')[2][0])} {abs(regr_params.get('xline_coefs')[2][0]):.2f}"
+                print(regr_params)
+                x_formula = f"INLINE*{(regr_params.get('x_coefs')[0]):.2f} {plus(regr_params.get('x_coefs')[1])} XLINE*{abs(regr_params.get('x_coefs')[1]):.2f} {plus(regr_params.get('x_coefs')[2])} {abs(regr_params.get('x_coefs')[2]):.2f}"
+                y_formula = f"INLINE*{(regr_params.get('y_coefs')[0]):.2f} {plus(regr_params.get('y_coefs')[1])} XLINE*{abs(regr_params.get('y_coefs')[1]):.2f} {plus(regr_params.get('x_coefs')[2])} {abs(regr_params.get('y_coefs')[2]):.2f}"
+                inline_formula = f"X*{(regr_params.get('inline_coefs')[0]):.2f} {plus(regr_params.get('inline_coefs')[1])}Y*{abs(regr_params.get('inline_coefs')[1]):.2f} {plus(regr_params.get('inline_coefs')[2])} {abs(regr_params.get('inline_coefs')[2]):.2f}"
+                xline_formula = f"X*{(regr_params.get('xline_coefs')[0]):.2f} {plus(regr_params.get('xline_coefs')[1])} Y*{abs(regr_params.get('xline_coefs')[1]):.2f}  {plus(regr_params.get('xline_coefs')[2])} {abs(regr_params.get('xline_coefs')[2]):.2f}"
 
                 return render(request, 'upload.html', {'inline_min_max': f"{min(inlines)}-{max(inlines)}", 
                                                        'xline_min_max': f"{min(xlines)}-{max(xlines)}",
