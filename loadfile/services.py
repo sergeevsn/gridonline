@@ -51,6 +51,8 @@ def read_segy(filename):
         read_ok = False
         return read_ok, None, None, None, None
 
+    os.remove(filename)
+
     return read_ok, inlines, xlines, x, y
 
 def read_table(filename):
@@ -84,6 +86,8 @@ def read_table(filename):
     if not 'y' in df.columns:
         print('Не найден столбец y/cdp_y')
         return
+
+    os.remove(filename)
     
     return read_ok, df.inline, df.xline, df.x, df.y
 
