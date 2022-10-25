@@ -44,19 +44,23 @@ def check_data_file(request):
 
 def read_segy(filename):
     read_ok = True
+    x_coords = []
+    y_coords = []
     try:
         with sgy.open(filename, ignore_geometry=True) as segyfile:
             segyfile.mmap()
             inlines = [segyfile.header[i][sgy.TraceField.INLINE_3D] for i in range(segyfile.tracecount)]
             xlines = [segyfile.header[i][sgy.TraceField.CROSSLINE_3D] for i in range(segyfile.tracecount)]
-            x = [segyfile.header[i][sgy.TraceField.CDP_X] for i in range(segyfile.tracecount)]
-            y = [segyfile.header[i][sgy.TraceField.CDP_Y] for i in range(segyfile.tracecount)]
+            x_coords = [segyfile.header[i][sgy.TraceField.CDP_X] for i in range(segyfile.tracecount)]
+            y_coords = [segyfile.header[i][sgy.TraceField.CDP_Y] for i in range(segyfile.tracecount)]
+            scaler = abs(segyfile.header[1][sgy.TraceField.SourceGroupScalar])
     except (UnboundLocalError, RuntimeError):
         read_ok = False
         return read_ok, None, None, None, None
 
     os.remove(filename)
-
+    x = list(map(lambda n: n/scaler, x_coords))
+    y = list(map(lambda n: n/scaler, y_coords))
     return read_ok, inlines, xlines, x, y
 
 
