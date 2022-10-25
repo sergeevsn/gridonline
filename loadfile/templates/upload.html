@@ -41,6 +41,8 @@
         
     </script>
 
+    {% if request.session.input_file_name %}
+
     <div class = "column is-one-quarter">
    
        <div class = "section">
@@ -152,10 +154,33 @@
                   </tr>
                  </tbody>
                 </table>
-              
           
         </div>
+        <div class = "section">
+            <h2 class="subtitle">Get INLINE, XLINE from X and Y</h2>
+            <form hx-post="/calc_inline_xline/" hx-target="#inline_xline">
+                <fieldset>
+                    <table class="table">
+                        <tr>
+                            <th>X:</th>
+                            <td><input size = "8" name="x" type="number" value="{{ X0 }}" style="width:100px;"></td>
+                            <th>Y:</th>
+                            <td><input size = "8" name="y" type="number" value="{{ Y0 }}" style="width:100px;"></td>
+                        </tr>
+                    </table>
+                    <table class ="table">
+                        <tr>
+                            <td><label id="inline_xline"> INLINE = <b>1</b>, XLINE = <b>1</b></label></td>
+
+                            <td><button type="submit">Recalc</button>
+                        </tr>
+
+                    </table>
+                </fieldset>
+            </form>
+        </div>
     </div>
+   {% endif %}
 </div>
 
    
