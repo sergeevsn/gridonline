@@ -4,6 +4,7 @@ from pandas.errors import ParserError
 import numpy as np
 import segyio as sgy
 import math
+import time
 
 from django.conf import settings
 
@@ -16,8 +17,10 @@ def handle_uploaded_file(f, fname):
     """ Загрузка файла на сервер """
     try:
         with open(get_full_filename(fname), 'wb+') as destination:
+
             for chunk in f.chunks():
                 destination.write(chunk)
+
     except OSError:
         return False
     finally:
