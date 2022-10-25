@@ -116,10 +116,10 @@ def get_regression(inlines, xlines, x, y):
     
 
     return { 
-            'x_coefs': linregX, 
-            'y_coefs': linregY,            
-            'inline_coefs': linregInl,
-            'xline_coefs': linregXln,
+            'x_coefs': linregX.tolist(), 
+            'y_coefs': linregY.tolist(),            
+            'inline_coefs': linregInl.tolist(),
+            'xline_coefs': linregXln.tolist(),
             'X0': linregX[0] + linregX[1] + linregX[2],
             'Y0': linregY[0] + linregY[1] + linregY[2],
             'step': step,

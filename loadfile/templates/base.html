@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
    
   
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
 
     
     <title>SEISMIC GRID ONLINE</title>
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">

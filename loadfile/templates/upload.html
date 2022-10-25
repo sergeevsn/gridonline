@@ -2,124 +2,161 @@
 
 {% block content %}
 <div class = "columns">
-  <div class = "column is-one-third">
-    <div class="section">       
-           <div class = "box">
-               <form action = "/" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                        {% for field in form %}
-                            <div class="field">
-                                <label class="label" for="{{ field.auto_id }}">{{ field.label }}</label>
-                                <div class ="control">
-                                {{ field }}
+   <div class = "column is-one-quarter">
+        <div class="section">       
+           
+                <form action = "/" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                            {% for field in form %}
+                                <div class="field">
+                                    <label class="label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                                    <div class ="control">
+                                    {{ field }}
+                                    </div>
                                 </div>
+                            {% endfor %}
+                            <div class="field">
+                                <button class="button is-link">
+                                Upload
+                                </button>
                             </div>
-                         {% endfor %}
-                        <div class="field">
-                            <button class="button is-link">
-                               Upload
-                            </button>
-                        </div>
-               </form>
-            </div>
-         
-    </div>
-  </div>  
-  <script>
-    const fileInput=document.getElementById("id_input_file");
-   
-    fileInput.onchange = () => {
-        const selectedFile = fileInput.files[0];
-        fileExtension = selectedFile.name.split('.').pop();
-        const formatSelector = document.getElementById("id_file_format")
-        if ((fileExtension == "sgy") || (fileExtension == "segy")) {
-            formatSelector.value = "SEG-Y"
-        }
-        else {
-            formatSelector.value = "table"
-        }
-        
-    }
-   
+                </form>
+                     
+        </div>
+    </div>  
+    <script>
+        const fileInput=document.getElementById("id_input_file");
     
-  </script
+        fileInput.onchange = () => {
+            const selectedFile = fileInput.files[0];
+            fileExtension = selectedFile.name.split('.').pop();
+            const formatSelector = document.getElementById("id_file_format")
+            if ((fileExtension == "sgy") || (fileExtension == "segy")) {
+                formatSelector.value = "SEG-Y"
+            }
+            else {
+                formatSelector.value = "table"
+            }         
+        }    
+        
+    </script>
 
-  <div class = "column is-half">
-    {% if inline_min_max and xline_min_max and x_min_max and y_min_max %}
-    <div class = "section">
-    <div class="box">
-      <h1 class = "title">{{ request.session.input_file_name }}</h1>
-      <table class="table">
-       
-        <tbody>
-            <tr>
-                <th>INLINES
-                <td>{{ inline_min_max }}</td>
-            </tr>    
-            <tr>
-                <th>XLINES
-                <td>{{ xline_min_max }}</td>
-            </tr>    
-            <tr>
-                <th>X
-                <td>{{ x_min_max }}</td>
-            </tr>    
-            <tr>
-                <th>Y
-                <td>{{ y_min_max }}</td>
-            </tr>    
-            <tr>
-                <th>INLINE Formula
-                <td>{{ inline_formula }}</td>
-            </tr>  
-            <tr>
-                <th>XLINE Formula
-                <td>{{ xline_formula }}
-                    
-                </td>
-            </tr>    
-            <tr>
-                <th>X Formula
-                <td>{{ x_formula }}</td>
-            </tr>  
-            <tr>
-                <th>Y Formula
-                <td>{{ y_formula }}</td>
-            </tr>  
-            <tr>
-                <th>Bin Size</th>
-                <td>{{ step }} </td>
-            </tr>
-            <tr>
-                <th>Azimuth</th>
-                <td>{{ alpha }} </td>
-            </tr>
-            <tr>
-                <th>Inlines along Y</th>
-                <td>{{ inline_along_y }} </td>
-            </tr>
-            <tr>
-                <th>Grid start coordinates</th>
-                <td>{{ X0 }}, {{ Y0 }} </td>
-            </tr>
-            <tr>
-                <th>1st point For Kingdom</th>
-                <td>{{ first_point }} </td>
-            </tr>
-            <tr>
-                <th>2nd point For Kingdom</th>
-                <td>{{ second_point }} </td>
-            </tr>
-            <tr>
-                <th>3rd point For Kingdom</th>
-                <td>{{ third_point }} </td>
-            </tr>
-        </tbody>
-    </table>
-  </div> 
+    <div class = "column is-one-quarter">
+   
+       <div class = "section">
+        {% if request.session.input_file_name %}
+        <h2 class="subtitle">{{ request.session.input_file_name }}</h2>
+        {% else %}
+        <h2 class="subtitle">Grid Information</h2>
+        {% endif %}
+            <table class="table is-size-7">       
+                <tbody>
+                    <tr>
+                        <th>INLINES
+                        <td>{{ inline_min_max }}</td>
+                    </tr>    
+                    <tr>
+                        <th>XLINES
+                        <td>{{ xline_min_max }}</td>
+                    </tr>    
+                    <tr>
+                        <th>X
+                        <td>{{ x_min_max }}</td>
+                    </tr>    
+                    <tr>
+                        <th>Y
+                        <td>{{ y_min_max }}</td>
+                    </tr>    
+                    <tr>
+                        <th>INLINE Formula
+                        <td>{{ inline_formula }}</td>
+                    </tr>  
+                    <tr>
+                        <th>XLINE Formula
+                        <td>{{ xline_formula }}
+                            
+                        </td>
+                    </tr>    
+                    <tr>
+                        <th>X Formula
+                        <td>{{ x_formula }}</td>
+                    </tr>  
+                    <tr>
+                        <th>Y Formula
+                        <td>{{ y_formula }}</td>
+                    </tr>  
+                    <tr>
+                        <th>Bin Size</th>
+                        <td>{{ step }} </td>
+                    </tr>
+                    <tr>
+                        <th>Azimuth</th>
+                        <td>{{ alpha }} </td>
+                    </tr>
+                    <tr>
+                        <th>Inlines along Y</th>
+                        <td>{{ inline_along_y }} </td>
+                    </tr>
+                    <tr>
+                        <th>Grid start coordinates</th>
+                        <td>{{ X0 }}, {{ Y0 }} </td>
+                    </tr>            
+                </tbody>
+            </table>
+         
+        </div>
+    </div>
+
+    <div class = "column is-half">
+        <div class = "section">
+            {% csrf_token%}
+            <h2 class="subtitle">3 Points for Kingdom</h2>
+              
+                <table class="table is-size-7">
+                 <tbody>                    
+                    <tr>
+                     <form hx-post="/calc_xy/" hx-target="#point1_xy">
+                        <th>1.</th>
+                        <td hx-trigger="change">INLINE</td>
+                        <td><input id="point1_inline" size = "3" name="inline" type="number" min="0" max="99999" value="{{ first_point_inline }}" style="width:60px;">
+                        <td>XLINE</td>
+                        <td><input id="point1_xline" size = "3" name="xline" type="number" min="0" max="99999" value="{{ first_point_xline }}" style="width:60px;">
+                       
+                        <td><label id="point1_xy"> X={{ first_point_x }}, Y={{ first_point_y }}</label>
+                        <td><button type="submit">Recalc</button>
+                     </form> 
+                   </tr>
+                   <tr>
+                    <form hx-post="/calc_xy/" hx-target="#point2_xy">
+                       <th>2.</th>
+                       <td hx-trigger="change">INLINE</td>
+                       <td><input id="point2_inline" size = "3" name="inline" type="number" min="0" max="99999" value="{{ second_point_inline }}" style="width:60px;">
+                       <td>XLINE</td>
+                       <td><input id="point2_xline" size = "3" name="xline" type="number" min="0" max="99999" value="{{ second_point_xline }}" style="width:60px;">
+                      
+                       <td><label id="point2_xy"> X={{ second_point_x }}, Y={{ second_point_y }}</label>
+                       <td><button type="submit">Recalc</button>
+                    </form> 
+                  </tr>
+                  <tr>
+                    <form hx-post="/calc_xy/" hx-target="#point3_xy">
+                       <th>3.</th>
+                       <td hx-trigger="change">INLINE</td>
+                       <td><input id="point3_inline" size = "3" name="inline" type="number" min="0" max="99999" value="{{ third_point_inline }}" style="width:60px;">
+                       <td>XLINE</td>
+                       <td><input id="point3_xline" size = "3" name="xline" type="number" min="0" max="99999" value="{{ third_point_xline }}" style="width:60px;">
+                      
+                       <td><label id="point3_xy"> X={{ third_point_x }}, Y={{ third_point_y }}</label>
+                       <td><button type="submit">Recalc</button>
+                    </form> 
+                  </tr>
+                 </tbody>
+                </table>
+              
+          
+        </div>
+    </div>
 </div>
-{% endif %}
-  </div>
-</div>
+
    
 {% endblock %}
