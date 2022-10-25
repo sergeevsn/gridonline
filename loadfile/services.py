@@ -62,8 +62,12 @@ def read_segy(filename):
         return read_ok, None, None, None, None
 
     os.remove(filename)
-    x = list(map(lambda n: n/scaler, x_coords))
-    y = list(map(lambda n: n/scaler, y_coords))
+    if not (scaler == 0):
+        x = list(map(lambda n: n/scaler, x_coords))
+        y = list(map(lambda n: n/scaler, y_coords))
+    else:
+        x = x_coords
+        y = y_coords
     return read_ok, inlines, xlines, x, y
 
 
